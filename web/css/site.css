@@ -113,3 +113,12 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.range-value {
+    height: 10px;
+    border: solid 1px #c0c0c0;
+}
+
+#alert {
+    display: none;
+}
