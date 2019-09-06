@@ -100,13 +100,13 @@ class MainTable extends \yii\db\ActiveRecord
                 ]);
             } else {
                 $connection = \Yii::$app->db;
-                $sql = "CALL sp_SaveData(7, '" . $email . "', '" . $fio . "', @result)";
-                $result = $connection->createCommand($sql)->queryScalar();
+                $sql = "CALL sp_SaveData(". $json_obj->rangeList .", '" . $email . "', '" . $fio . "', @result)";
+                $result = $connection->createCommand($sql)->queryOne();
                 return json_encode([
                     'error' => false,
                     'data' => [
                         'resultErrorCode' => 0,
-                        'result' => $result,
+                        'result' => $result['result'],
                     ],
                 ]);
             }

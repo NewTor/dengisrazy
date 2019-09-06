@@ -31,13 +31,13 @@ spApplication.Config.Values = {
  */
 spApplication.Error = {};
 spApplication.Error.errorCodes = {
-    emptyFio: 'Не заполнено поле ФИО',
-    wrongFio: 'Не корректное поле ФИО',
-    emptyEmail: 'Не заполнено поле E-mail',
-    wrongEmail: 'Не корректный E-mail',
-    existsEmail: 'Данный E-mail уже существует',
-    dataSuccess: 'Информация успешно добавлена',
-    wrongPostData: 'Не корректный запрос'
+    emptyFio: 'Не заполнено поле ФИО.',
+    wrongFio: 'Не корректное поле ФИО.',
+    emptyEmail: 'Не заполнено поле E-mail.',
+    wrongEmail: 'Не корректный E-mail.',
+    existsEmail: 'Данный E-mail уже существует.',
+    dataSuccess: 'Информация успешно добавлена.',
+    wrongPostData: 'Не корректный запрос.'
 };
 /**
  *
@@ -117,7 +117,7 @@ $(function () {
             if(res.error) {
                 spApplication.Controllers.alertResult(spApplication.Error.serverErrorCodes[res.data.resultErrorCode], 'alert-danger');
             } else {
-                spApplication.Controllers.alertResult(spApplication.Error.serverErrorCodes[res.data.resultErrorCode] + 'Результат процедуры sp_SaveData: ' + res.data.result, 'alert-success');
+                spApplication.Controllers.alertResult(spApplication.Error.serverErrorCodes[res.data.resultErrorCode] + ' Результат процедуры sp_SaveData: ' + res.data.result, 'alert-success');
                 $('#email').val('');
                 $('#fio').val('');
             }
@@ -126,5 +126,3 @@ $(function () {
     });
 
 });
-
-
