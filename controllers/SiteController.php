@@ -19,7 +19,8 @@ class SiteController extends Controller
         return $this->render('index');
     }
     /**
-     * @return int
+     * Экшн сохранения данных
+     * @return string
      */
     public function actionSaveData()
     {

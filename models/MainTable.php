@@ -46,14 +46,15 @@ class MainTable extends \yii\db\ActiveRecord
         ];
     }
     /**
-     *
+     * Сохранение данных
+     * @return string
      */
     public function saveData()
     {
         $post = Yii::$app->request->post();
+        $error_code = Yii::$app->params['errorCodes'];
         if($post) {
             $json_obj = json_decode($post['json']);
-            $error_code = Yii::$app->params['errorCodes'];
             if($json_obj->email == '') {
                 return json_encode([
                     'error' => true,
