@@ -6,7 +6,9 @@ use Yii;
 use yii\web\Controller;
 use app\models\MainTable;
 
-
+/**
+ * Default controller
+ */
 class SiteController extends Controller
 {
     /**
