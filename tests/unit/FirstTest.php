@@ -1,9 +1,7 @@
 <?php
 namespace tests\unit;
 
-use PHPUnit\Framework\TestCase;
-
-class FirstTest extends TestCase
+class FirstTest extends \PHPUnit\Framework\TestCase
 {
     public function testTrue()
     {
