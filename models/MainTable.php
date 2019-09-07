@@ -53,12 +53,12 @@ class MainTable extends \yii\db\ActiveRecord
         $post = Yii::$app->request->post();
         if($post) {
             $json_obj = json_decode($post['json']);
-
+            $error_code = Yii::$app->params['errorCodes'];
             if($json_obj->email == '') {
                 return json_encode([
                     'error' => true,
                     'data' => [
-                        'resultErrorCode' => 3,
+                        'resultErrorCode' => $error_code['emptyEmail'],
                     ],
                 ]);
             } elseif ($json_obj->email != '' && preg_match("/^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i", $json_obj->email)) {
@@ -67,7 +67,7 @@ class MainTable extends \yii\db\ActiveRecord
                 return json_encode([
                     'error' => true,
                     'data' => [
-                        'resultErrorCode' => 4,
+                        'resultErrorCode' => $error_code['wrongEmail'],
                     ],
                 ]);
             }
@@ -76,7 +76,7 @@ class MainTable extends \yii\db\ActiveRecord
                 return json_encode([
                     'error' => true,
                     'data' => [
-                        'resultErrorCode' => 1,
+                        'resultErrorCode' => $error_code['emptyFio'],
                     ],
                 ]);
             } elseif ($json_obj->fio != '' && preg_match("/^[A-Za-z]+\s?[A-Za-z]*\s*[A-Za-z]*$/i", $json_obj->fio)) {
@@ -85,7 +85,7 @@ class MainTable extends \yii\db\ActiveRecord
                 return json_encode([
                     'error' => true,
                     'data' => [
-                        'resultErrorCode' => 2,
+                        'resultErrorCode' => $error_code['wrongFio'],
                     ],
                 ]);
             }
@@ -95,7 +95,7 @@ class MainTable extends \yii\db\ActiveRecord
                 return json_encode([
                     'error' => true,
                     'data' => [
-                        'resultErrorCode' => 5,
+                        'resultErrorCode' => $error_code['existsEmail'],
                     ],
                 ]);
             } else {
@@ -105,7 +105,7 @@ class MainTable extends \yii\db\ActiveRecord
                 return json_encode([
                     'error' => false,
                     'data' => [
-                        'resultErrorCode' => 0,
+                        'resultErrorCode' => $error_code['dataSuccess'],
                         'result' => $result['result'],
                     ],
                 ]);
@@ -114,7 +114,7 @@ class MainTable extends \yii\db\ActiveRecord
             return json_encode([
                 'error' => true,
                 'data' => [
-                    'resultErrorCode' => 6,
+                    'resultErrorCode' => $error_code['wrongPostData'],
                 ],
             ]);
         }
