@@ -27,7 +27,10 @@ class m190906_102505_main_table extends Migration
 
         $sql = "DROP PROCEDURE IF EXISTS `sp_SaveData`; 
                 CREATE DEFINER=`root`@`%` PROCEDURE `sp_SaveData`(IN `count` INT, IN `email` VARCHAR(255), IN `fio` VARCHAR(255), OUT `result` INT) 
-                NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN INSERT INTO `main_table` (`id`, `count`, `email`, `fio`, `create`) VALUES (NULL, count, email, fio, UNIX_TIMESTAMP()); 
+                NOT DETERMINISTIC CONTAINS SQL SQL SECURITY 
+                DEFINER 
+                BEGIN 
+                INSERT INTO `main_table` (`id`, `count`, `email`, `fio`, `create`) VALUES (NULL, count, email, fio, UNIX_TIMESTAMP()); 
                 SET result = count % 2; 
                 SELECT result; 
                 END";
@@ -40,7 +43,6 @@ class m190906_102505_main_table extends Migration
     public function down()
     {
         $this->dropTable($this->table);
-        $sql = "DROP PROCEDURE IF EXISTS `sp_SaveData`";
-        $this->execute($sql);
+        $this->execute("DROP PROCEDURE IF EXISTS `sp_SaveData`");
     }
 }
