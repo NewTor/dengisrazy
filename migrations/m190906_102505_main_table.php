@@ -25,15 +25,13 @@ class m190906_102505_main_table extends Migration
             'create' => Schema::TYPE_INTEGER . '(11) NOT NULL DEFAULT 0',
         ]);
 
-        /*$sql = "DELIMITER $$
-                CREATE DEFINER=`root`@`%` PROCEDURE `sp_SaveData`(IN count INT, IN email VARCHAR(255), IN fio VARCHAR(255), OUT result INT)
-                BEGIN
-                INSERT INTO `main_table` (`id`, `count`, `email`, `fio`, `create`) VALUES (NULL, count, email, fio, UNIX_TIMESTAMP()); 
-                SET result = count % 2;
-                SELECT result;
-                END$$
-                DELIMITER";
-        $this->execute($sql);*/
+        $sql = "DROP PROCEDURE IF EXISTS `sp_SaveData`; 
+                CREATE DEFINER=`root`@`%` PROCEDURE `sp_SaveData`(IN `count` INT, IN `email` VARCHAR(255), IN `fio` VARCHAR(255), OUT `result` INT) 
+                NOT DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER BEGIN INSERT INTO `main_table` (`id`, `count`, `email`, `fio`, `create`) VALUES (NULL, count, email, fio, UNIX_TIMESTAMP()); 
+                SET result = count % 2; 
+                SELECT result; 
+                END";
+        $this->execute($sql);
     }
     /**
      * Revert migration
@@ -42,8 +40,7 @@ class m190906_102505_main_table extends Migration
     public function down()
     {
         $this->dropTable($this->table);
-        /*$sql = "DROP PROCEDURE IF EXISTS `sp_SaveData`";
-        $this->execute($sql);*/
+        $sql = "DROP PROCEDURE IF EXISTS `sp_SaveData`";
+        $this->execute($sql);
     }
-
 }
